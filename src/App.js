@@ -1,52 +1,61 @@
-import React from 'react';
-import { Routes, Route, Navigate, Link } from 'react-router-dom';
-import { AuthProvider } from './contexts/AuthContext';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './components/Layout';
+import Navbar from './components/Navbar';
 import MedicalLabs from './Features/labs/MedicalLab/MedicalLab';
 import EngineeringLabs from './Features/labs/EngineeringLab/EngineeringLab';
 import BioChemLabs from './Features/labs/BioChemLab/BioChemLab';
 import PhysicsLabs from './Features/labs/PhysicsLab/PhysicsLab';
 import CollaborationSpace from './Features/collaboration/CollaborationSpace';
 import StudentDashboard from './Features/analytics/StudentDashboard';
-import AITutorPortal from './Features/tutor/AITutor';
+import Leaderboard from './components/UI/Leaderboard';
+import Resources from './Features/resources/resources';
+import Home from './components/Home';
+import './App.css';
+import './styles/sidebar.css';
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <AuthProvider>
-      <div>
-        {/* Navigation Menu */}
-        <nav>
-          <ul>
-            <li><Link to="/medical">Medical Labs</Link></li>
-            <li><Link to="/engineering">Engineering Labs</Link></li>
-            <li><Link to="/biochem">BioChem Labs</Link></li>
-            <li><Link to="/physics">Physics Labs</Link></li>
-            <li><Link to="/collab/1">Collaboration Space</Link></li>
-            <li><Link to="/analytics">Student Dashboard</Link></li>
-            <li><Link to="/tutor">AI Tutor Portal</Link></li>
-          </ul>
-        </nav>
-
-        {/* Routes */}
-        <Routes>
-          {/* Default Route */}
-          <Route path="/" element={<Navigate to="/analytics" replace />} />
-          
-          {/* Labs */}
-          <Route path="/medical" element={<MedicalLabs />} />
-          <Route path="/engineering" element={<EngineeringLabs />} />
-          <Route path="/biochem" element={<BioChemLabs />} />
-          <Route path="/physics" element={<PhysicsLabs />} />
-
-          {/* Features */}
-          <Route path="/collab/:labId" element={<CollaborationSpace />} />
-          <Route path="/analytics" element={<StudentDashboard />} />
-          <Route path="/tutor" element={<AITutorPortal />} />
-
-          {/* Fallback Route */}
-          <Route path="*" element={<div>404 - Page Not Found</div>} />
-        </Routes>
+    <BrowserRouter>
+      <div className="app-wrapper">
+        <Navbar toggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
+        <Layout isSidebarOpen={sidebarOpen} toggleSidebar={() => setSidebarOpen(!sidebarOpen)}>
+          <Routes>
+            {/* Home route with background image */}
+            <Route 
+              path="/" 
+              element={
+                <div className="home-background">
+                  <Home />
+                </div>
+              } 
+            />
+            <Route path="/home" element={
+              <div className="home-background">
+                <Home />
+              </div>
+            } />
+            
+            {/* Lab routes */}
+            <Route path="/medical" element={<MedicalLabs />} />
+            <Route path="/engineering" element={<EngineeringLabs />} />
+            <Route path="/biochem" element={<BioChemLabs />} />
+            <Route path="/physics" element={<PhysicsLabs />} />
+            
+            {/* Feature routes */}
+            <Route path="/collab" element={<CollaborationSpace />} />
+            <Route path="/analytics" element={<StudentDashboard />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/resources" element={<Resources />} />
+            
+            {/* Fallback route */}
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </Layout>
       </div>
-    </AuthProvider>
+    </BrowserRouter>
   );
 }
 
