@@ -1,6 +1,6 @@
 // src/components/labs/PhysicsLab.js
 import React from 'react';
-import { Entity, Scene } from 'aframe-react';
+import { Scene } from 'aframe-react';
 
 export default function PhysicsLab() {
   return (

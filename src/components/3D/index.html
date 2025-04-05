@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>NexaReality - 3D Science Labs</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        body { 
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #root {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 1000;
+            transition: opacity 0.5s ease;
+        }
+        .loading-spinner {
+            border: 5px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 5px solid #6e48aa;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error-message {
+            color: #ff6b6b;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 80%;
+        }
+    </style>
+    <script>
+        // Initialize loading state before React loads
+        window.appStatus = {
+            loaded: false,
+            error: null
+        };
+        
+        // Add loaded class when app is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const root = document.getElementById('root');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            
+            // This will be called from React when app is fully loaded
+            window.appReady = function() {
+                setTimeout(() => {
+                    loadingOverlay.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingOverlay.style.display = 'none';
+                    }, 500);
+                }, 500);
+            };
+            
+            // Handle errors before React loads
+            window.appError = function(error) {
+                window.appStatus.error = error;
+                const errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.textContent = error.message || 'Failed to load application';
+                loadingOverlay.appendChild(errorElement);
+            };
+        });
+    </script>
+</head>
+<body>
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+        <h2>Loading 3D Science Lab</h2>
+        <p>Initializing WebGL environment...</p>
+    </div>
+    
+    <div id="root"></div>
+
+    <!-- Polyfills for older browsers -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2Ces6%2Ces2015%2Ces2016%2Ces2017%2Ces2018%2Ces2019%2CIntersectionObserver%2CWebAnimations"></script>
+
+    <!-- Production React build -->
+    <script>
+        // This will be replaced by your build system
+        // with the actual script tags for production
+        if (process.env.NODE_ENV === 'development') {
+            document.write('<script src="http://localhost:3000/static/js/bundle.js"><\/script>');
+        }
+    </script>
+</body>
+</html>

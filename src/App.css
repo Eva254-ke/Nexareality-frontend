@@ -7,14 +7,18 @@
   --transition: all 0.3s ease;
 }
 
-/* App Layout */
+/* App Layout - Critical for Babylon.js */
 .app-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  isolation: isolate; /* Creates new stacking context */
 }
 
-/* Navbar styles (adjust as needed) */
+/* Navbar styles */
 .navbar {
   position: fixed;
   top: 0;
@@ -29,22 +33,95 @@
   padding: 0 20px;
 }
 
-/* Main content area */
+/* Main content area - Updated for 3D content */
 .main-content {
-  margin-top: 60px; /* Account for navbar height */
-  padding: 20px;
+  margin-top: 60px;
+  padding: 0; /* Removed padding that could interfere with 3D view */
   flex-grow: 1;
-  transition: margin-left 0.3s ease;
+  transition: margin-left var(--transition);
+  position: relative;
+}
+
+/* Babylon.js Viewport Container - Critical Fixes */
+.babylon-viewport {
+  width: 100%;
+  height: calc(100vh - 60px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  contain: strict; /* Improves performance */
+}
+
+/* Canvas Rendering Fixes - Must include these */
+.babylon-viewport canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  outline: none !important;
+  touch-action: none !important;
+  image-rendering: crisp-edges;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Home background */
+.home-background {
+  width: 100%;
+  height: calc(100vh - 60px);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sidebar transitions */
+.sidebar {
+  transition: var(--transition);
+  z-index: 100;
+}
+
+.sidebar-open {
+  margin-left: var(--sidebar-width);
+}
+
+.sidebar-closed {
+  margin-left: var(--sidebar-collapsed);
+}
+
+/* Z-index management */
+.layout-content {
+  position: relative;
+  z-index: 1;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0 !important;
-    padding: 15px;
   }
   
   .navbar {
     padding: 0 10px;
   }
+
+  .babylon-viewport {
+    height: calc(100vh - 60px);
+  }
+
+  /* Mobile touch fixes */
+  .babylon-viewport canvas {
+    touch-action: pan-x pan-y !important;
+  }
+}
+
+/* Prevent flash of unstyled content */
+body:not(.loaded) .babylon-viewport {
+  visibility: hidden;
+}
+
+/* GPU Acceleration */
+.babylon-viewport > div {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

@@ -1,5 +1,6 @@
 // src/components/collaboration/CollaborationSpace.js
 import React from 'react';
+import 'aframe';
 import { Scene } from 'aframe-react';
 
 export default function CollaborationSpace() {

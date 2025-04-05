@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 export default function Leaderboard() {
-    const [scores, setScores] = useState([
+    const [scores] = useState([
         { id: 1, name: 'Alex', score: 2450, avatar: '/assets/ui/avatar1.png' },
         { id: 2, name: 'Taylor', score: 2310, avatar: '/assets/ui/avatar2.png' }
     ]);

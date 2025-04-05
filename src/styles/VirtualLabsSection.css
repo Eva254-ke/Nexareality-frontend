@@ -1,0 +1,219 @@
+/* Modern CSS for 2x2 Grid Virtual Labs Section with Sidebar Compatibility */
+:root {
+    --primary: #6366f1;
+    --primary-light: #a5b4fc;
+    --secondary: #10b981;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --gray: #94a3b8;
+    --sidebar-width: 250px;
+    --header-height: 60px;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Main content area - accounts for sidebar and header */
+  .virtual-labs-container {
+    width: calc(100% - var(--sidebar-width));
+    margin-left: var(--sidebar-width);
+    padding: 2rem;
+    margin-top: var(--header-height);
+    min-height: calc(100vh - var(--header-height));
+    background-color: #f9fafb;
+    transition: margin-left 0.3s ease;
+  }
+  
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-top: 1rem;
+  }
+  
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 5rem;
+    height: 0.25rem;
+    background: var(--primary);
+    margin: 1rem auto 0;
+    border-radius: 0.25rem;
+  }
+  
+  /* 2x2 Grid Layout */
+  .career-paths-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .career-path {
+    background: white;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    min-height: 280px;
+  }
+  
+  .career-path:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: var(--card-shadow-hover);
+  }
+  
+  /* Individual card styling */
+  .career-path:nth-child(1) {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  }
+  
+  .career-path:nth-child(2) {
+    background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+  }
+  
+  .career-path:nth-child(3) {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  }
+  
+  .career-path:nth-child(4) {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  }
+  
+  .career-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+  }
+  
+  .career-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+  }
+  
+  .career-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0;
+  }
+  
+  .career-description {
+    color: var(--gray);
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 1rem 1.5rem;
+    margin: 0;
+  }
+  
+  .enter-lab {
+    display: inline-block;
+    background: white;
+    color: var(--primary);
+    border: 1px solid var(--primary-light);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 1.5rem 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+  
+  .enter-lab:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.05);
+  }
+  
+  .lab-list {
+    padding: 0 1.5rem 1.5rem;
+    margin: 0;
+    list-style: none;
+    flex-grow: 1;
+  }
+  
+  .lab-list li {
+    position: relative;
+    padding-left: 1.75rem;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: var(--dark);
+  }
+  
+  .lab-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .virtual-labs-container {
+      width: 100%;
+      margin-left: 0;
+      padding: 1.5rem;
+    }
+    
+    .career-paths-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      max-width: 600px;
+    }
+    
+    .career-path {
+      min-height: auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .virtual-labs-container {
+      padding: 1rem;
+    }
+    
+    .career-title {
+      font-size: 1.25rem;
+    }
+  }
+  
+  /* Animation for cards */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .career-path {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+  
+  /* Staggered animations */
+  .career-path:nth-child(1) { animation-delay: 0.1s; }
+  .career-path:nth-child(2) { animation-delay: 0.2s; }
+  .career-path:nth-child(3) { animation-delay: 0.3s; }
+  .career-path:nth-child(4) { animation-delay: 0.4s; }
+  
+  /* Sidebar collapsed state */
+  .sidebar-collapsed .virtual-labs-container {
+    width: calc(100% - 60px);
+    margin-left: 60px;
+  }

@@ -1,0 +1,52 @@
+.medical-lab-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.medical-lab-error {
+  text-align: center;
+  padding: 20px;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.loading-progress {
+  height: 5px;
+  background-color: #4caf50;
+  margin-bottom: 10px;
+}
+
+.return-link,
+.return-button,
+.retry-button,
+.help-link {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return-link:hover,
+.return-button:hover,
+.retry-button:hover,
+.help-link:hover {
+  background-color: #0056b3;
+}

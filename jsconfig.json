@@ -2,7 +2,27 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["*"]
-    }
+      "'*'": ["*"]
+    },
+    "types": [
+      "babel__core",
+      "babel__traverse",
+      "draco3d",
+      "estree",
+      "graceful-fs",
+      "html-minifier-terser",
+      "istanbul-lib-coverage",
+      "istanbul-lib-report",
+      "istanbul-reports",
+      "jest",
+      "json-schema",
+      "offscreencanvas",
+      "prettier",
+      "q",
+      "react-reconciler",
+      "semver",
+      "testing-library__jest-dom",
+      "webxr"
+    ]
   }
 }
