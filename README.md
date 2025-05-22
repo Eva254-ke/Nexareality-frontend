@@ -1,6 +1,6 @@
 # NexaReality - Immersive STEM Learning Platform
 
-![NexaReality Banner](public/assets/branding/nexareality-banner.png)
+[NexaReality Banner](public/assets/branding/nexareality-banner.png)
 
 A virtual reality platform for interactive STEM education, featuring:
 - 🧪 Virtual labs with realistic 3D simulations
